@@ -109,14 +109,14 @@ class Kohana_Pagination {
         $config['group'] = (string) $group;
 
         // Recursively load requested config groups
-        while (isset($config['group']) AND isset($config_file->$config['group']))
+        while (isset($config['group']) AND isset($config_file->{$config['group']}))
         {
             // Temporarily store config group name
             $group = $config['group'];
             unset($config['group']);
 
             // Add config group values, not overwriting existing keys
-            $config += $config_file->$group;
+            $config += $config_file->{$group};
         }
 
         // Get rid of possible stray config group names
@@ -375,7 +375,7 @@ class Kohana_Pagination {
      */
     public function __get($key)
     {
-        return isset($this->$key) ? $this->$key : NULL;
+        return isset($this->{$key}) ? $this->$key : NULL;
     }
 
     /**
