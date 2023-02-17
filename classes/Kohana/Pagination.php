@@ -210,13 +210,10 @@ class Kohana_Pagination {
         switch ($this->config['current_page']['source'])
         {
             case 'query_string':
-
-                return URL::site($this->_route->uri($this->_route_params) .
-                                $this->query(array($this->config['current_page']['key'] => $page)));
+                return URL::site(Request::current()->uri()).URL::query(array($this->config['current_page']['key'] => $page));
 
             case 'route':
-
-                return URL::site($this->_route->uri(array_merge($this->_route_params, array($this->config['current_page']['key'] => $page))) . $this->query());
+                return URL::site(Request::current()->uri(array($this->config['current_page']['key'] => $page))).URL::query();
         }
 
         return '#';
